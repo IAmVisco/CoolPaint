@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolPaint", "CoolPaint\CoolPaint.csproj", "{08FED41D-6884-47B9-B81A-B1C4B0B28ACD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08FED41D-6884-47B9-B81A-B1C4B0B28ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08FED41D-6884-47B9-B81A-B1C4B0B28ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08FED41D-6884-47B9-B81A-B1C4B0B28ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08FED41D-6884-47B9-B81A-B1C4B0B28ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5443FA1-D2A5-4553-B01E-3FE8FBB58975}
+	EndGlobalSection
+EndGlobal
