@@ -21,6 +21,7 @@ namespace CoolPaint
     public partial class MainWindow : Window
     {
         Rectangle rect;
+        Ellipse ell;
         
         public MainWindow()
         {
@@ -30,7 +31,11 @@ namespace CoolPaint
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             rect = new Rectangle(Colors.Black, new Point(100, 100), new Point(200, 250));
+            ell = new Ellipse(Colors.Black, new Point(200, 200), new Point(400, 344));
             rect.Draw(cnv);
+            ell.Draw(cnv);
+            rect = null;
+            ell = null;
         }
 
         private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
