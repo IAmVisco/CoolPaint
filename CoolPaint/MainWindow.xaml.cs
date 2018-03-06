@@ -20,6 +20,8 @@ namespace CoolPaint
     /// </summary>
     public partial class MainWindow : Window
     {
+        Rectangle rect;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +29,29 @@ namespace CoolPaint
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            rect = new Rectangle(Colors.Black, new Point(100, 100), new Point(200, 250));
+            rect.Draw(cnv);
+        }
 
+        private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point p1 = e.GetPosition(cnv);
+            rect = new Rectangle(Colors.Black, p1, p1);
+            rect.Draw(cnv);
+        }
+
+        private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            rect = null;
+        }
+
+        private void cnv_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (rect != null)
+            {
+                Point p2 = e.GetPosition(cnv);
+                rect.P2 = p2;
+            }
         }
     }     
 }

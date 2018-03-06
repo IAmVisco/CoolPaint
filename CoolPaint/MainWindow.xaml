@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoolPaint"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="1024">
     <Grid Background="Gray">
-        <Canvas Margin="0,25,0,0" Background="White"/>
+        <Canvas Margin="0,50,0,0" Background="White" Name="cnv" MouseLeftButtonDown="cnv_MouseLeftButtonDown" MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove"/>
         <RadioButton Content="Pen" HorizontalAlignment="Left" Margin="10,5,0,0" 
                      VerticalAlignment="Top" IsChecked="True"/>
         <RadioButton Content="Rectangle" HorizontalAlignment="Left" Margin="61,5,0,0" 
                      VerticalAlignment="Top"/>
         <RadioButton Content="Ellipse" HorizontalAlignment="Left" Margin="145,5,0,0" 
                      VerticalAlignment="Top"/>
-        <Button Content="Draw" Canvas.Left="416" Canvas.Top="-23" Margin="414,1,10,298" Click="Button_Click"/>
+        <Button Content="Draw" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="Button_Click"/>
     </Grid>
 </Window>
  

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 
 namespace CoolPaint.Class
 {
-    class Ellipse : Shape
-    {
-        public Ellipse(Color color, Point topLeft, Point botRight):base(color, topLeft, botRight)
-        {
+    //class Ellipse : Shape
+    //{
+    //    public Ellipse(Color color, Point topLeft, Point botRight):base(color, topLeft, botRight)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }

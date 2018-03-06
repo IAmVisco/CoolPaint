@@ -17,12 +17,20 @@ namespace CoolPaint
 {
     class Rectangle : Shape
     {
-        double width, height;
-
-        public Rectangle(Color color, Point topLeft, Point botRight):base(color, topLeft, botRight)
+        public Rectangle(Color color, Point p1, Point p2) : base(color, p1, p2)
         {
-            width = botRight.X - topLeft.X;
-            height = botRight.Y - topLeft.Y;
+        }
+
+        protected override System.Windows.Shapes.Shape GenerateDrawBase()
+        {
+            return new System.Windows.Shapes.Rectangle();
+        }
+        protected override void SetSides()
+        {
+            if (p2.X - p1.X >= 0)
+                Width = p2.X - p1.X;
+            if (p2.Y - p1.Y >= 0)
+                Height = p2.Y - p1.Y;
         }
     }
 }
