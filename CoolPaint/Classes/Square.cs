@@ -21,17 +21,11 @@ namespace CoolPaint
         {
         }
 
-        protected override System.Windows.Shapes.Shape GenerateDrawBase()
-        {
-            return new System.Windows.Shapes.Rectangle();
-        }
-
         protected override void SideSet()
         {
             if (p2.X - p1.X >= 0)
                 Width = p2.X - p1.X;
             Height = Width;
         }
-
     }
 }

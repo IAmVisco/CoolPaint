@@ -23,7 +23,9 @@ namespace CoolPaint
         Rectangle rect;
         Ellipse ell;
         Square sqr;
-        
+        Circle crc;
+        Point p1;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +35,9 @@ namespace CoolPaint
         {
             rect = new Rectangle(RNGColor(), new Point(100, 100), new Point(200, 250));
             ell = new Ellipse(RNGColor(), new Point(200, 200), new Point(400, 344));
-            sqr = new Square(RNGColor(), new Point(0, 0), new Point(10, 10));
+            sqr = new Square(RNGColor(), new Point(0, 0), new Point(100, 100));
+            crc = new Circle(RNGColor(), new Point(400, 0), new Point(600, 200));
+            crc.Draw(cnv);
             sqr.Draw(cnv);
             rect.Draw(cnv);
             ell.Draw(cnv);
@@ -44,24 +48,24 @@ namespace CoolPaint
 
         private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point p1 = e.GetPosition(cnv);
-            sqr = new Square(RNGColor(), p1, p1);
-            sqr.Draw(cnv);
+            p1 = e.GetPosition(cnv);
+            crc = new Circle(RNGColor(), p1, p1);
+            crc.Draw(cnv);
             //rect = new Rectangle(RNGColor(), p1, p1);
             //rect.Draw(cnv);
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            sqr = null;
+            crc = null;
         }
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
         {
-            if (sqr != null)
+            if (crc != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 Point p2 = e.GetPosition(cnv);
-                sqr.P2 = p2;
+                crc.P2 = p2;
             }
         }
 

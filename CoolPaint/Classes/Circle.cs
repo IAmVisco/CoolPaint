@@ -21,5 +21,13 @@ namespace CoolPaint
         {
         }
 
+        protected override void SideSet()
+        {
+            if (p2.X - p1.X >= 0)
+                Width = p2.X - p1.X;
+            Height = Width;
+            ((System.Windows.Shapes.Rectangle)dBase).RadiusX = Width / 2;
+            ((System.Windows.Shapes.Rectangle)dBase).RadiusY = Height / 2;
+        }
     }
 }
