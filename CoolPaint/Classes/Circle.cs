@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 
 namespace CoolPaint
 {
-    static class Drawing 
+    class Circle : Ellipse
     {
-        public static void Draw()
+        public Circle(Color color, Point p1, Point p2) : base(color, p1, p2)
         {
-
         }
+
     }
 }

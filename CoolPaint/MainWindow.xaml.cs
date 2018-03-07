@@ -22,6 +22,7 @@ namespace CoolPaint
     {
         Rectangle rect;
         Ellipse ell;
+        Square sqr;
         
         public MainWindow()
         {
@@ -30,10 +31,13 @@ namespace CoolPaint
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            rect = new Rectangle(Colors.Black, new Point(100, 100), new Point(200, 250));
-            ell = new Ellipse(Colors.Black, new Point(200, 200), new Point(400, 344));
+            rect = new Rectangle(RNGColor(), new Point(100, 100), new Point(200, 250));
+            ell = new Ellipse(RNGColor(), new Point(200, 200), new Point(400, 344));
+            sqr = new Square(RNGColor(), new Point(0, 0), new Point(10, 10));
+            sqr.Draw(cnv);
             rect.Draw(cnv);
             ell.Draw(cnv);
+            sqr = null;
             rect = null;
             ell = null;
         }
@@ -41,22 +45,38 @@ namespace CoolPaint
         private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Point p1 = e.GetPosition(cnv);
-            rect = new Rectangle(Colors.Black, p1, p1);
-            rect.Draw(cnv);
+            sqr = new Square(RNGColor(), p1, p1);
+            sqr.Draw(cnv);
+            //rect = new Rectangle(RNGColor(), p1, p1);
+            //rect.Draw(cnv);
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            rect = null;
+            sqr = null;
         }
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
         {
-            if (rect != null)
+            if (sqr != null)
             {
                 Point p2 = e.GetPosition(cnv);
-                rect.P2 = p2;
+                sqr.P2 = p2;
             }
+        }
+
+        public Color RNGColor()
+        {
+            Random r = new Random();
+            Color color = new Color
+            {
+                R = (byte)r.Next(256),
+                G = (byte)r.Next(256),
+                B = (byte)r.Next(256),
+                A = (byte)(255 - r.Next(100))
+            };
+            
+            return color;
         }
     }     
 }
