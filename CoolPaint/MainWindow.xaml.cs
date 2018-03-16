@@ -52,7 +52,7 @@ namespace CoolPaint
             p1 = e.GetPosition(cnv);
             rect = new Rectangle(RNGColor(), p1, p1);
             rect.Draw(cnv);
-            crc.Draw(cnv);
+            rect.Draw(cnv);
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
