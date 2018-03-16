@@ -8,12 +8,14 @@
         Title="MainWindow" Height="600" Width="1024">
     <Grid Background="Gray">
         <Canvas Margin="0,50,0,0" Background="White" Name="cnv" MouseLeftButtonDown="cnv_MouseLeftButtonDown" MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove"/>
-        <RadioButton Content="Pen" HorizontalAlignment="Left" Margin="10,5,0,0" 
-                     VerticalAlignment="Top" IsChecked="True"/>
-        <RadioButton Content="Rectangle" HorizontalAlignment="Left" Margin="61,5,0,0" 
-                     VerticalAlignment="Top"/>
-        <RadioButton Content="Ellipse" HorizontalAlignment="Left" Margin="145,5,0,0" 
-                     VerticalAlignment="Top"/>
+        <RadioButton Content="Square" HorizontalAlignment="Left" Margin="11,18,0,0" 
+                     VerticalAlignment="Top" IsChecked="True" Name="sqrRadio"/>
+        <RadioButton Content="Rectangle" HorizontalAlignment="Left" Margin="77,18,0,0" 
+                     VerticalAlignment="Top" Name="rectRadio"/>
+        <RadioButton Content="Circle" HorizontalAlignment="Left" Margin="161,18,0,0" 
+                     VerticalAlignment="Top" Name="crcRadio"/>
+        <RadioButton Content="Ellipse" HorizontalAlignment="Left" Margin="221,18,0,0" 
+                     VerticalAlignment="Top" Name="ellRadio"/>
         <Button Content="Draw" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="Button_Click"/>
     </Grid>
 </Window>

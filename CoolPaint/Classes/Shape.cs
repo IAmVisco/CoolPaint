@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace CoolPaint
 {
     abstract class Shape
@@ -40,7 +41,7 @@ namespace CoolPaint
             set
             {
                 p1 = value;
-                SetSides();
+                SideSet();
             }
         }
         protected Point p1;
@@ -53,7 +54,7 @@ namespace CoolPaint
             set
             {
                 p2 = value;
-                SetSides();
+                SideSet();
             }
         }
         protected Point p2;
@@ -90,7 +91,7 @@ namespace CoolPaint
 
             dBase = GenerateDrawBase();
             FillFig();
-            SetSides();
+            SideSet();
         }
 
         public void Draw(Canvas cnv)
@@ -105,6 +106,6 @@ namespace CoolPaint
             dBase.Fill = new SolidColorBrush(color);
         }
 
-        protected abstract void SetSides();
+        protected abstract void SideSet();
     }
 }
