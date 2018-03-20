@@ -49,14 +49,15 @@ namespace CoolPaint
 
         private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Cursor = Cursors.Pen;
             p1 = e.GetPosition(cnv);
             rect = new Rectangle(RNGColor(), p1, p1);
-            rect.Draw(cnv);
             rect.Draw(cnv);
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Cursor = Cursors.Arrow;
             rect = null;
         }
 

@@ -41,7 +41,7 @@ namespace CoolPaint
             set
             {
                 p1 = value;
-                SideSet();
+                StartPosSet();
             }
         }
         protected Point p1;
@@ -53,7 +53,10 @@ namespace CoolPaint
             }
             set
             {
-                p2 = value;
+                SetP2X(value);
+                SetP2Y(value);
+
+                StartPosSet();
                 SideSet();
             }
         }
@@ -81,29 +84,83 @@ namespace CoolPaint
             }
         }
 
+        public bool revX, revY;
+
         protected abstract System.Windows.Shapes.Shape GenerateDrawBase();
 
         public Shape(Color color, Point p1, Point p2)
         {
+            
             this.color = color;
             this.p1 = p1;
-            this.p2 = p2;
+
+            SetP2X(p2);
+            SetP2Y(p2);
 
             dBase = GenerateDrawBase();
+            StartPosSet();
+
             FillFig();
             SideSet();
         }
 
+        protected void SetP2X(Point p3)
+        {
+            double p1x = p1.X;
+            if (revX)
+            {
+                p1x += Width;
+            }
+
+            if (p1x > p3.X)
+            {
+                p1.X = p3.X;
+                p2.X = p1x;
+                revX = true;
+            }
+            else
+            {
+                p2.X = p3.X;
+                revX = false;
+            }
+        }
+
+        protected void SetP2Y(Point p3)
+        {
+            double p1y = p1.Y;
+            if (revY)
+            {
+                p1y += Height;
+            }
+
+            if (p1y > p3.Y)
+            {
+                p1.Y = p3.Y;
+                p2.Y = p1y;
+                revY = true;
+            }
+            else
+            {
+                p2.Y = p3.Y;
+                revY = false;
+            }
+        }
+
         public void Draw(Canvas cnv)
         {
-            Canvas.SetLeft(dBase, p1.X);
-            Canvas.SetTop(dBase, p1.Y);
+
             cnv.Children.Add(dBase);
         }
 
         private void FillFig()
         {
             dBase.Fill = new SolidColorBrush(color);
+        }
+
+        private void StartPosSet()
+        {
+            Canvas.SetLeft(dBase, p1.X);
+            Canvas.SetTop(dBase, p1.Y);
         }
 
         protected abstract void SideSet();
