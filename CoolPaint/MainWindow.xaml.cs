@@ -27,6 +27,8 @@ namespace CoolPaint
         Triangle tri;
         Point p1;
         Random r = new Random();
+        Factory factory;
+        Shape shape;
 
         public MainWindow()
         {
@@ -57,22 +59,23 @@ namespace CoolPaint
         {
             Cursor = Cursors.Pen;
             p1 = e.GetPosition(cnv);
-            rect = new Rectangle(RNGColor(), p1, p1);
-            rect.Draw(cnv);
+            shape = factory.FactoryMethod(RNGColor(), p1, p1);
+            //rect = new Rectangle(RNGColor(), p1, p1);
+            shape.Draw(cnv);
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Cursor = Cursors.Arrow;
-            rect = null;
+            //rect = null;
         }
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
         {
-            if (rect != null && e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Point p2 = e.GetPosition(cnv);
-                rect.P2 = p2;
+                shape.P2 = p2;
             }
         }
 
@@ -87,6 +90,11 @@ namespace CoolPaint
             };
             
             return color;
+        }
+
+        private void sqrRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            factory = new SquareFactory();
         }
     }     
 }

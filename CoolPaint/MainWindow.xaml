@@ -9,11 +9,11 @@
     <Grid Background="Gray">
         <Canvas Margin="0,50,0,0" Background="White" Name="cnv" MouseLeftButtonDown="cnv_MouseLeftButtonDown" MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove"/>
         <RadioButton Content="Square" HorizontalAlignment="Left" Margin="11,18,0,0" 
-                     VerticalAlignment="Top" Name="sqrRadio"/>
+                     VerticalAlignment="Top" Name="sqrRadio" Checked="sqrRadio_Checked"/>
         <RadioButton Content="Rectangle" HorizontalAlignment="Left" Margin="77,18,0,0" 
                      VerticalAlignment="Top" Name="rectRadio"/>
         <RadioButton Content="Circle" HorizontalAlignment="Left" Margin="161,18,0,0" 
-                     VerticalAlignment="Top" Name="crcRadio"/>
+                     VerticalAlignment="Top" Name="crcRadio"/> 
         <RadioButton Content="Ellipse" HorizontalAlignment="Left" Margin="221,18,0,0" 
                      VerticalAlignment="Top" Name="ellRadio"/>
         <RadioButton Content="Triangle" HorizontalAlignment="Left" Margin="281,18,0,0" 
