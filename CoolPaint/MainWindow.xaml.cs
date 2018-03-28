@@ -24,6 +24,7 @@ namespace CoolPaint
         Ellipse ell;
         Square sqr;
         Circle crc;
+        Triangle tri;
         Point p1;
         Random r = new Random();
 
@@ -34,14 +35,19 @@ namespace CoolPaint
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            rect = new Rectangle(RNGColor(), new Point(100, 100), new Point(200, 250));
-            ell = new Ellipse(RNGColor(), new Point(200, 200), new Point(400, 344));
-            sqr = new Square(RNGColor(), new Point(0, 0), new Point(100, 100));
-            crc = new Circle(RNGColor(), new Point(400, 0), new Point(600, 200));
+            cnv.Children.Clear();
+            sqr = new Square(RNGColor(), new Point(50, 50), new Point(100, 100));
+            rect = new Rectangle(RNGColor(), new Point(120, 50), new Point(300, 180));
+            ell = new Ellipse(RNGColor(), new Point(100, 200), new Point(300, 340));
+            crc = new Circle(RNGColor(), new Point(400, 50), new Point(600, 250));
+            tri = new Triangle(RNGColor(), new Point(650, 100), new Point(750, 150));
+            tri.Draw(cnv);
             crc.Draw(cnv);
             sqr.Draw(cnv);
             rect.Draw(cnv);
             ell.Draw(cnv);
+            tri = null;
+            crc = null;
             sqr = null;
             rect = null;
             ell = null;
