@@ -20,15 +20,17 @@ namespace CoolPaint
     /// </summary>
     public partial class MainWindow : Window
     {
-        Rectangle rect;
-        Ellipse ell;
-        Square sqr;
-        Circle crc;
-        Triangle tri;
-        Point p1;
-        Random r = new Random();
-        Factory factory;
-        Shape shape;
+        private Rectangle rect;
+        private Ellipse ell;
+        private Square sqr;
+        private Circle crc;
+        private Triangle tri;
+        private Point p1;
+        private Hexagon hex;
+
+        private Random r = new Random();
+        private Factory factory;
+        private Shape shape;
 
         public MainWindow()
         {
@@ -38,36 +40,39 @@ namespace CoolPaint
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             cnv.Children.Clear();
+
             sqr = new Square(RNGColor(), new Point(50, 50), new Point(100, 100));
-            rect = new Rectangle(RNGColor(), new Point(120, 50), new Point(300, 180));
-            ell = new Ellipse(RNGColor(), new Point(100, 200), new Point(300, 340));
-            crc = new Circle(RNGColor(), new Point(400, 50), new Point(600, 250));
-            tri = new Triangle(RNGColor(), new Point(650, 100), new Point(750, 150));
-            tri.Draw(cnv);
-            crc.Draw(cnv);
             sqr.Draw(cnv);
-            rect.Draw(cnv);
-            ell.Draw(cnv);
-            tri = null;
-            crc = null;
             sqr = null;
+            rect = new Rectangle(RNGColor(), new Point(120, 50), new Point(300, 180));
+            rect.Draw(cnv);
             rect = null;
+            ell = new Ellipse(RNGColor(), new Point(100, 200), new Point(300, 340));
+            ell.Draw(cnv);
             ell = null;
+            crc = new Circle(RNGColor(), new Point(400, 50), new Point(600, 250));
+            crc.Draw(cnv);
+            crc = null;
+            tri = new Triangle(RNGColor(), new Point(650, 100), new Point(850, 250));
+            tri.Draw(cnv);
+            tri = null;
+            hex = new Hexagon(RNGColor(), new Point(400, 270), new Point(600, 500));
+            hex.Draw(cnv);
+            hex = null;
         }
 
         private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Cursor = Cursors.Pen;
             p1 = e.GetPosition(cnv);
+
             shape = factory.FactoryMethod(RNGColor(), p1, p1);
-            //rect = new Rectangle(RNGColor(), p1, p1);
             shape.Draw(cnv);
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Cursor = Cursors.Arrow;
-            //rect = null;
         }
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
@@ -95,6 +100,31 @@ namespace CoolPaint
         private void sqrRadio_Checked(object sender, RoutedEventArgs e)
         {
             factory = new SquareFactory();
+        }
+
+        private void rectRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            factory = new RectangleFactory();
+        }
+
+        private void crcRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            factory = new CircleFactory();
+        }
+
+        private void ellRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            factory = new EllipseFactory();
+        }
+
+        private void triRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            factory = new TriangleFactory();
+        }
+
+        private void hexRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            factory = new HexagonFactory();
         }
     }     
 }

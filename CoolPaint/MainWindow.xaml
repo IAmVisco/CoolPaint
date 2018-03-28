@@ -11,13 +11,15 @@
         <RadioButton Content="Square" HorizontalAlignment="Left" Margin="11,18,0,0" 
                      VerticalAlignment="Top" Name="sqrRadio" Checked="sqrRadio_Checked"/>
         <RadioButton Content="Rectangle" HorizontalAlignment="Left" Margin="77,18,0,0" 
-                     VerticalAlignment="Top" Name="rectRadio"/>
+                     VerticalAlignment="Top" Name="rectRadio" Checked="rectRadio_Checked" IsChecked="True"/>
         <RadioButton Content="Circle" HorizontalAlignment="Left" Margin="161,18,0,0" 
-                     VerticalAlignment="Top" Name="crcRadio"/> 
+                     VerticalAlignment="Top" Name="crcRadio" Checked="crcRadio_Checked"/> 
         <RadioButton Content="Ellipse" HorizontalAlignment="Left" Margin="221,18,0,0" 
-                     VerticalAlignment="Top" Name="ellRadio"/>
+                     VerticalAlignment="Top" Name="ellRadio" Checked="ellRadio_Checked"/>
         <RadioButton Content="Triangle" HorizontalAlignment="Left" Margin="281,18,0,0" 
-                     VerticalAlignment="Top" Name="triRadio"/>
+                     VerticalAlignment="Top" Name="triRadio" Checked="triRadio_Checked"/>
+        <RadioButton Content="Hexagon" HorizontalAlignment="Left" Margin="351,18,0,0" 
+                     VerticalAlignment="Top" Name="hexRadio" Checked="hexRadio_Checked"/>
         <Button Content="Draw" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="Button_Click"/>
     </Grid>
 </Window>

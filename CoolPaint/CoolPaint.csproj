@@ -57,6 +57,7 @@
     <Compile Include="Classes\Circle.cs" />
     <Compile Include="Classes\Ellipse.cs" />
     <Compile Include="Classes\Factory.cs" />
+    <Compile Include="Classes\Hexagon.cs" />
     <Compile Include="Classes\Polygon.cs" />
     <Compile Include="Classes\Rectangle.cs" />
     <Compile Include="Classes\Shape.cs" />
@@ -68,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\ShapesList.cs" />
     <Compile Include="Classes\Square.cs" />
     <Compile Include="Classes\Triangle.cs" />
     <Compile Include="MainWindow.xaml.cs">
