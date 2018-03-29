@@ -11,20 +11,20 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Title="MainWindow" Height="600" Width="1024" Loaded="Window_Loaded">
-    <Grid Background="#01579B">
+    <Grid Background="#333333">
         <Canvas Margin="0,50,0,0" Background="White" Name="cnv" MouseLeftButtonDown="cnv_MouseLeftButtonDown" MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove"/>
         <RadioButton Content="Square" HorizontalAlignment="Left" Margin="11,18,0,0" 
-                     VerticalAlignment="Top" Name="sqrRadio" Checked="sqrRadio_Checked"/>
+                     VerticalAlignment="Top" Name="sqrRadio" Checked="sqrRadio_Checked" Foreground="#BFFFFFFF"/>
         <RadioButton Content="Rectangle" HorizontalAlignment="Left" Margin="82,18,0,0" 
-                     VerticalAlignment="Top" Name="rectRadio" Checked="rectRadio_Checked" IsChecked="True"/>
+                     VerticalAlignment="Top" Name="rectRadio" Checked="rectRadio_Checked" Foreground="#BFFFFFFF" IsChecked="True"/>
         <RadioButton Content="Circle" HorizontalAlignment="Left" Margin="175,18,0,0" 
-                     VerticalAlignment="Top" Name="crcRadio" Checked="crcRadio_Checked"/>
+                     VerticalAlignment="Top" Name="crcRadio" Checked="crcRadio_Checked" Foreground="#BFFFFFFF"/>
         <RadioButton Content="Ellipse" HorizontalAlignment="Left" Margin="244,17,0,0" 
-                     VerticalAlignment="Top" Name="ellRadio" Checked="ellRadio_Checked"/>
+                     VerticalAlignment="Top" Name="ellRadio" Checked="ellRadio_Checked" Foreground="#BFFFFFFF"/>
         <RadioButton Content="Triangle" HorizontalAlignment="Left" Margin="314,17,0,0" 
-                     VerticalAlignment="Top" Name="triRadio" Checked="triRadio_Checked"/>
+                     VerticalAlignment="Top" Name="triRadio" Checked="triRadio_Checked" Foreground="#BFFFFFFF"/>
         <RadioButton Content="Hexagon" HorizontalAlignment="Left" Margin="391,17,0,0" 
-                     VerticalAlignment="Top" Name="hexRadio" Checked="hexRadio_Checked"/>
+                     VerticalAlignment="Top" Name="hexRadio" Checked="hexRadio_Checked" Foreground="#BFFFFFFF"/>
         <Button Content="Draw" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="Button_Click"/>
     </Grid>
 </Window>
