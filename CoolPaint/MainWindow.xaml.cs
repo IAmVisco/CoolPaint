@@ -126,5 +126,28 @@ namespace CoolPaint
         {
             factory = new HexagonFactory();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Action<Window> reposWindow = w =>
+            {
+                w.Left = this.Left + this.Width;
+                w.Top = this.Top;
+            };
+
+            Action<Window> changeHeight = w =>
+            {
+                w.Height = this.Height;
+            };
+
+            ShapesWindow list = new ShapesWindow();
+            list.Width = 300;
+            reposWindow(list);
+            list.Owner = this;
+            list.Title = "Shape List";
+            list.Show();
+            this.LocationChanged += (s, _) => reposWindow(list);
+            this.SizeChanged += (s, _) => changeHeight(list);
+        }
     }     
 }
