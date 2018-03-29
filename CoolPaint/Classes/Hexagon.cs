@@ -21,10 +21,6 @@ namespace CoolPaint
         {
         }
 
-        //public Hexagon(Shape shape) : base(shape)
-        //{
-        //}
-
         protected override Point[] GeneratePolygon()
         {
             Point[] hexagon = new Point[]

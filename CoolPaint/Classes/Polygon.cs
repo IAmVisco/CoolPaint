@@ -47,12 +47,6 @@ namespace CoolPaint
         {
         }
 
-        public Polygon(Shape shape) : base(shape.Color, shape.P1, shape.P2)
-        {
-            revX = shape.revX;
-            revY = shape.revY;
-        }
-
         protected override System.Windows.Shapes.Shape GenerateDrawBase()
         {
             return new System.Windows.Shapes.Polygon();

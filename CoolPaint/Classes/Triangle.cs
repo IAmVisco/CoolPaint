@@ -22,10 +22,6 @@ namespace CoolPaint
         {
         }
 
-        public Triangle(Shape shape) : base(shape)
-        {
-        }
-
         protected override Point[] GeneratePolygon()
         {
             Point[] triangle = new Point[3]
