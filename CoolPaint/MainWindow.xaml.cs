@@ -96,7 +96,7 @@ namespace CoolPaint
             
             return color;
         }
-
+        #region Factories
         private void sqrRadio_Checked(object sender, RoutedEventArgs e)
         {
             factory = new SquareFactory();
@@ -126,7 +126,7 @@ namespace CoolPaint
         {
             factory = new HexagonFactory();
         }
-
+        #endregion
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Action<Window> reposWindow = w =>
