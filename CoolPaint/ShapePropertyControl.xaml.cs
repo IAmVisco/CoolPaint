@@ -13,16 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoolPaint.Classes
+namespace CoolPaint
 {
     /// <summary>
     /// Interaction logic for ShapePropertyControl.xaml
     /// </summary>
     public partial class ShapePropertyControl : UserControl
     {
-        public ShapePropertyControl()
+        Shape shape;
+
+        public ShapePropertyControl(Shape shape)
         {
             InitializeComponent();
+            this.shape = shape;
+
+            Name.Text = shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1);
+            Height.Text = shape.Height.ToString();
+            Width.Text = shape.Width.ToString();
         }
     }
 }

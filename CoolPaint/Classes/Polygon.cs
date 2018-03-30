@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace CoolPaint
 {
-    abstract class Polygon : Shape
+    public abstract class Polygon : Shape
     {
         public override double Width
         {

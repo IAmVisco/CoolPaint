@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace CoolPaint
 {
-    class Circle : Ellipse
+    public class Circle : Ellipse
     {
         public Circle(Color color, Point p1, Point p2) : base(color, p1, p2)
         {

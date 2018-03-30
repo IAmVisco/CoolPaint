@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 
 namespace CoolPaint
 {
-    abstract class Shape
+    public abstract class Shape
     {
         public System.Windows.Shapes.Shape dBase;
         public Color Color

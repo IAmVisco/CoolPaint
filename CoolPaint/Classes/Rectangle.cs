@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace CoolPaint
 {
-    class Rectangle : Shape
+    public class Rectangle : Shape
     {
         public Rectangle(Color color, Point p1, Point p2) : base(color, p1, p2)
         {

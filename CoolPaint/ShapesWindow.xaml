@@ -12,7 +12,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox Margin="10" Name="shapesBox" Background="#444"/>
+        <ListBox Margin="10" Name="shapesBox" Background="#444" HorizontalContentAlignment="Stretch"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="120" Grid.Row="1"/>
         <Button Content="ReColor" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="120" Grid.Row="1"/>
 

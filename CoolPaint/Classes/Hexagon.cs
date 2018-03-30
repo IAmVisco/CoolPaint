@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace CoolPaint
 {
-    class Hexagon : Polygon
+    public class Hexagon : Polygon
     {
         public Hexagon(Color color, Point p1, Point p2) : base(color, p1, p2)
         {

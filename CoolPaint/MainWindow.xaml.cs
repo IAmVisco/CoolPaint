@@ -65,12 +65,13 @@ namespace CoolPaint
 
             shape = factory.FactoryMethod(RNGColor(), p1, p1);
             shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Cursor = Cursors.Arrow;
+            
         }
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
@@ -79,7 +80,11 @@ namespace CoolPaint
             {
                 Point p2 = e.GetPosition(cnv);
                 shape.P2 = p2;
+                ShapePropertyControl spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+                spc.Height.Text = Math.Round(shape.Height, 1).ToString();
+                spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             }
+            
         }
 
         public Color RNGColor()

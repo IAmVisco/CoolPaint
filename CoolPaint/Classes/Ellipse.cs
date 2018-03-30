@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace CoolPaint
 {
-    class Ellipse : Rectangle
+    public class Ellipse : Rectangle
     {
         public Ellipse(Color color, Point p1, Point p2) : base(color, p1, p2)
         {
