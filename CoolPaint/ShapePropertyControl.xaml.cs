@@ -20,7 +20,7 @@ namespace CoolPaint
     /// </summary>
     public partial class ShapePropertyControl : UserControl
     {
-        Shape shape;
+        public Shape shape;
 
         public ShapePropertyControl(Shape shape)
         {

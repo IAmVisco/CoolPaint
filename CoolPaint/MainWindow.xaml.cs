@@ -80,6 +80,7 @@ namespace CoolPaint
             {
                 Point p2 = e.GetPosition(cnv);
                 shape.P2 = p2;
+
                 ShapePropertyControl spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
                 spc.Height.Text = Math.Round(shape.Height, 1).ToString();
                 spc.Width.Text = Math.Round(shape.Width, 1).ToString();

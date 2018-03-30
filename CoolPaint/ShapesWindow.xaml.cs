@@ -19,9 +19,22 @@ namespace CoolPaint
     /// </summary>
     public partial class ShapesWindow : Window
     {
+        MainWindow mainWin = new MainWindow();
+
         public ShapesWindow()
         {
             InitializeComponent();
+        }
+
+        private void ReClrBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //int z = shapesBox.SelectedIndex;
+            //Object obj = shapesBox.SelectedItem;
         }
     }
 }
