@@ -19,8 +19,6 @@ namespace CoolPaint
     /// </summary>
     public partial class ShapesWindow : Window
     {
-        MainWindow mainWin = new MainWindow();
-
         public ShapesWindow()
         {
             InitializeComponent();
@@ -28,13 +26,14 @@ namespace CoolPaint
 
         private void ReClrBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            (shapesBox.SelectedItem as ShapePropertyControl).shape.Color = (Owner as MainWindow).RNGColor();
         }
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
         {
-            //int z = shapesBox.SelectedIndex;
-            //Object obj = shapesBox.SelectedItem;
+            (Owner as MainWindow).cnv.Children.Remove((shapesBox.SelectedItem as ShapePropertyControl).shape.dBase);
+            shapesBox.Items.Remove(shapesBox.SelectedItem);
+
         }
     }
 }
