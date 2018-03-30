@@ -25,6 +25,7 @@ namespace CoolPaint
         private Factory factory;
         private Shape shape;
         private ShapesWindow shapesWindow;
+        ShapePropertyControl spc;
 
         public MainWindow()
         {
@@ -39,22 +40,40 @@ namespace CoolPaint
             #region FirstTimeDrawing
             shape = new Square(RNGColor(), new Point(50, 50), new Point(100, 100));
             shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
+            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             shape = new Rectangle(RNGColor(), new Point(120, 50), new Point(300, 180));
             shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
+            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             shape = new Ellipse(RNGColor(), new Point(100, 200), new Point(300, 340));
             shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
+            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             shape = new Circle(RNGColor(), new Point(400, 50), new Point(600, 250));
             shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
+            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             shape = new Triangle(RNGColor(), new Point(650, 100), new Point(850, 250));
             shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
+            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             shape = new Hexagon(RNGColor(), new Point(400, 270), new Point(600, 500));
             shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
+            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             #endregion
         }
 
@@ -66,12 +85,12 @@ namespace CoolPaint
             shape = factory.FactoryMethod(RNGColor(), p1, p1);
             shape.Draw(cnv);
             shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+            shapesWindow.shapesBox.SelectedIndex = shapesWindow.shapesBox.Items.Count - 1;
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Cursor = Cursors.Arrow;
-            
+            Cursor = Cursors.Arrow;       
         }
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
@@ -81,7 +100,7 @@ namespace CoolPaint
                 Point p2 = e.GetPosition(cnv);
                 shape.P2 = p2;
 
-                ShapePropertyControl spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
+                spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
                 spc.Height.Text = Math.Round(shape.Height, 1).ToString();
                 spc.Width.Text = Math.Round(shape.Width, 1).ToString();
             }
@@ -133,17 +152,17 @@ namespace CoolPaint
         #endregion
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Action<Window> reposWindow = w =>
+            void reposWindow(Window w)
             {
                 w.Left = this.Left + this.Width;
                 w.Top = this.Top;
-            };
+            }
 
-            Action<Window> changeHeight = w =>
+            void changeHeight(Window w)
             {
                 w.Height = this.Height;
                 reposWindow(w);
-            };
+            }
 
             shapesWindow = new ShapesWindow
             {

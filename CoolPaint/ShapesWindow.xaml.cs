@@ -31,9 +31,11 @@ namespace CoolPaint
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
         {
-            (Owner as MainWindow).cnv.Children.Remove((shapesBox.SelectedItem as ShapePropertyControl).shape.dBase);
-            shapesBox.Items.Remove(shapesBox.SelectedItem);
-
+            if (shapesBox.SelectedItem != null)
+            {
+                (Owner as MainWindow).cnv.Children.Remove((shapesBox.SelectedItem as ShapePropertyControl).shape.dBase);
+                shapesBox.Items.Remove(shapesBox.SelectedItem);
+            }
         }
     }
 }

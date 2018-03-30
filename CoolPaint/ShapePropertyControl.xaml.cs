@@ -31,5 +31,29 @@ namespace CoolPaint
             Height.Text = shape.Height.ToString();
             Width.Text = shape.Width.ToString();
         }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+        }
+
+        private void Width_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (!(Mouse.LeftButton == MouseButtonState.Pressed))
+                    shape.Width = Convert.ToDouble(Width.Text);
+            }
+            catch { }
+        }
+
+        private void Height_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (!(Mouse.LeftButton == MouseButtonState.Pressed))
+                    shape.Height = Convert.ToDouble(Height.Text);
+            }
+            catch { }
+        }
     }
 }
