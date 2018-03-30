@@ -26,7 +26,8 @@ namespace CoolPaint
 
         private void ReClrBtn_Click(object sender, RoutedEventArgs e)
         {
-            (shapesBox.SelectedItem as ShapePropertyControl).shape.Color = (Owner as MainWindow).RNGColor();
+            if (shapesBox.SelectedItem != null)
+                (shapesBox.SelectedItem as ShapePropertyControl).shape.Color = (Owner as MainWindow).RNGColor();
         }
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
@@ -35,6 +36,7 @@ namespace CoolPaint
             {
                 (Owner as MainWindow).cnv.Children.Remove((shapesBox.SelectedItem as ShapePropertyControl).shape.dBase);
                 shapesBox.Items.Remove(shapesBox.SelectedItem);
+                shapesBox.SelectedIndex = shapesBox.Items.Count - 1;
             }
         }
     }
