@@ -67,9 +67,16 @@
     <Compile Include="Classes\Polygon.cs" />
     <Compile Include="Classes\Rectangle.cs" />
     <Compile Include="Classes\Shape.cs" />
+    <Compile Include="ShapePropertyControl.xaml.cs">
+      <DependentUpon>ShapePropertyControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShapesWindow.xaml.cs">
       <DependentUpon>ShapesWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="ShapePropertyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

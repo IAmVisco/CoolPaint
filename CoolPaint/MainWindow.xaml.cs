@@ -20,17 +20,11 @@ namespace CoolPaint
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Rectangle rect;
-        private Ellipse ell;
-        private Square sqr;
-        private Circle crc;
-        private Triangle tri;
         private Point p1;
-        private Hexagon hex;
-
         private Random r = new Random();
         private Factory factory;
         private Shape shape;
+        private ShapesWindow shapesWindow;
 
         public MainWindow()
         {
@@ -40,25 +34,28 @@ namespace CoolPaint
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             cnv.Children.Clear();
+            shapesWindow.shapesBox.Items.Clear();
 
-            sqr = new Square(RNGColor(), new Point(50, 50), new Point(100, 100));
-            sqr.Draw(cnv);
-            sqr = null;
-            rect = new Rectangle(RNGColor(), new Point(120, 50), new Point(300, 180));
-            rect.Draw(cnv);
-            rect = null;
-            ell = new Ellipse(RNGColor(), new Point(100, 200), new Point(300, 340));
-            ell.Draw(cnv);
-            ell = null;
-            crc = new Circle(RNGColor(), new Point(400, 50), new Point(600, 250));
-            crc.Draw(cnv);
-            crc = null;
-            tri = new Triangle(RNGColor(), new Point(650, 100), new Point(850, 250));
-            tri.Draw(cnv);
-            tri = null;
-            hex = new Hexagon(RNGColor(), new Point(400, 270), new Point(600, 500));
-            hex.Draw(cnv);
-            hex = null;
+            #region FirstTimeDrawing
+            shape = new Square(RNGColor(), new Point(50, 50), new Point(100, 100));
+            shape.Draw(cnv);
+            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shape = new Rectangle(RNGColor(), new Point(120, 50), new Point(300, 180));
+            shape.Draw(cnv);
+            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shape = new Ellipse(RNGColor(), new Point(100, 200), new Point(300, 340));
+            shape.Draw(cnv);
+            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shape = new Circle(RNGColor(), new Point(400, 50), new Point(600, 250));
+            shape.Draw(cnv);
+            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shape = new Triangle(RNGColor(), new Point(650, 100), new Point(850, 250));
+            shape.Draw(cnv);
+            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            shape = new Hexagon(RNGColor(), new Point(400, 270), new Point(600, 500));
+            shape.Draw(cnv);
+            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
+            #endregion
         }
 
         private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -68,6 +65,7 @@ namespace CoolPaint
 
             shape = factory.FactoryMethod(RNGColor(), p1, p1);
             shape.Draw(cnv);
+            shapesWindow.shapesBox.Items.Add(shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1));
         }
 
         private void cnv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -138,16 +136,18 @@ namespace CoolPaint
             Action<Window> changeHeight = w =>
             {
                 w.Height = this.Height;
+                reposWindow(w);
             };
 
-            ShapesWindow list = new ShapesWindow();
-            list.Width = 300;
-            reposWindow(list);
-            list.Owner = this;
-            list.Title = "Shape List";
-            list.Show();
-            this.LocationChanged += (s, _) => reposWindow(list);
-            this.SizeChanged += (s, _) => changeHeight(list);
+            shapesWindow = new ShapesWindow
+            {
+                Width = 300,
+                Owner = this,
+            };
+            reposWindow(shapesWindow);
+            shapesWindow.Show();
+            this.LocationChanged += (s, _) => reposWindow(shapesWindow);
+            this.SizeChanged += (s, _) => changeHeight(shapesWindow);
         }
     }     
 }
