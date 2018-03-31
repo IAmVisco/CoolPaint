@@ -36,45 +36,6 @@ namespace CoolPaint
         {
             cnv.Children.Clear();
             shapesWindow.shapesBox.Items.Clear();
-
-            #region FirstTimeDrawing
-            shape = new Square(RNGColor(), new Point(50, 50), new Point(100, 100));
-            shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
-            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
-            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
-            shape = new Rectangle(RNGColor(), new Point(120, 50), new Point(300, 180));
-            shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
-            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
-            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
-            shape = new Ellipse(RNGColor(), new Point(100, 200), new Point(300, 340));
-            shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
-            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
-            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
-            shape = new Circle(RNGColor(), new Point(400, 50), new Point(600, 250));
-            shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
-            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
-            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
-            shape = new Triangle(RNGColor(), new Point(650, 100), new Point(850, 250));
-            shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
-            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
-            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
-            shape = new Hexagon(RNGColor(), new Point(400, 270), new Point(600, 500));
-            shape.Draw(cnv);
-            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
-            spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-            spc.Height.Text = Math.Round(shape.Height, 1).ToString();
-            spc.Width.Text = Math.Round(shape.Width, 1).ToString();
-            #endregion
         }
 
         private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
