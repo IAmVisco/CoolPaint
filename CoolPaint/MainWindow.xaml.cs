@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Collections.Generic;
 
 namespace CoolPaint
 {
@@ -24,6 +18,7 @@ namespace CoolPaint
         private Random r = new Random();
         private Factory factory;
         private Shape shape;
+
         private ShapesWindow shapesWindow;
         ShapePropertyControl spc;
 
@@ -134,6 +129,62 @@ namespace CoolPaint
             shapesWindow.Show();
             this.LocationChanged += (s, _) => reposWindow(shapesWindow);
             this.SizeChanged += (s, _) => changeHeight(shapesWindow);
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog
+            {
+                InitialDirectory = "C:\\Projects\\ООП\\CoolPaint",
+                Filter = "JSON Files (*.json)|*.json|All files (*.*)|*.*",
+                FilterIndex = 0,
+                RestoreDirectory = true
+            };
+
+            if (saveFile.ShowDialog() == true)
+            {
+                List<Type> typeList = new List<Type>()
+                {
+                    typeof(Color), typeof(Point), typeof(Shape)
+                };
+                List<Shape> listShape = new List<Shape>();
+                foreach (ShapePropertyControl contr in shapesWindow.shapesBox.Items)
+                {
+                    listShape.Add(contr.shape);
+                    if (!typeList.Contains(contr.shape.GetType()))
+                        typeList.Add(contr.shape.GetType());                      
+                }
+                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(listShape.GetType(), typeList.ToArray());
+                using (FileStream fStream = new FileStream(saveFile.FileName, FileMode.Create))
+                {
+                    jsonSerializer.WriteObject(fStream, listShape);
+                }
+            }
+        }
+
+        private void LoadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog
+            {
+                InitialDirectory = "C:\\Projects\\ООП\\CoolPaint",
+                Filter = "JSON Files (*.json)|*.json|All files (*.*)|*.*",
+                FilterIndex = 0,
+                RestoreDirectory = true
+            };
+
+            if (openFile.ShowDialog() == true)
+                {
+                    StreamReader sr = new StreamReader(openFile.FileName);
+                    try
+                    {
+                        // read
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    sr.Close();
+                }
         }
     }     
 }

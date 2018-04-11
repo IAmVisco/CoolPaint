@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
+using System.Runtime.Serialization;
 
 namespace CoolPaint
 {
-    public abstract class Shape
+    [Serializable]
+    public abstract class Shape : ISerializable
     {
         public System.Windows.Shapes.Shape dBase;
         public Color Color
@@ -89,8 +80,7 @@ namespace CoolPaint
         protected abstract System.Windows.Shapes.Shape GenerateDrawBase();
 
         public Shape(Color color, Point p1, Point p2)
-        {
-            
+        {        
             this.color = color;
             this.p1 = p1;
 
@@ -102,6 +92,11 @@ namespace CoolPaint
 
             FillFig();
             SideSet();
+        }
+
+        protected Shape(SerializationInfo info, StreamingContext context)
+        {
+
         }
 
         protected void SetP2X(Point p3)
@@ -164,5 +159,12 @@ namespace CoolPaint
         }
 
         protected abstract void SideSet();
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("color", color);
+            info.AddValue("point1", p1);
+            info.AddValue("point2", p2);         
+        }
     }
 }
