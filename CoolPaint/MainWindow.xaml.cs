@@ -21,6 +21,19 @@ namespace CoolPaint
 
         private ShapesWindow shapesWindow;
         ShapePropertyControl spc;
+        OpenFileDialog openFile;
+
+        List<Type> typeList = new List<Type>()
+        {
+            typeof(Rectangle),
+            typeof(Square),
+            typeof(Circle),
+            typeof(Ellipse),
+            typeof(Triangle),
+            typeof(Hexagon),
+            typeof(Color),
+            typeof(Point)
+        };
 
         public MainWindow()
         {
@@ -51,7 +64,7 @@ namespace CoolPaint
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && openFile == null)
             {
                 Point p2 = e.GetPosition(cnv);
                 shape.P2 = p2;
@@ -143,16 +156,10 @@ namespace CoolPaint
 
             if (saveFile.ShowDialog() == true)
             {
-                List<Type> typeList = new List<Type>()
-                {
-                    typeof(Color), typeof(Point), typeof(Shape)
-                };
                 List<Shape> listShape = new List<Shape>();
                 foreach (ShapePropertyControl contr in shapesWindow.shapesBox.Items)
                 {
-                    listShape.Add(contr.shape);
-                    if (!typeList.Contains(contr.shape.GetType()))
-                        typeList.Add(contr.shape.GetType());                      
+                    listShape.Add(contr.shape);                
                 }
                 DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(listShape.GetType(), typeList.ToArray());
                 using (FileStream fStream = new FileStream(saveFile.FileName, FileMode.Create))
@@ -164,7 +171,7 @@ namespace CoolPaint
 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog
+            openFile = new OpenFileDialog
             {
                 InitialDirectory = "C:\\Projects\\ООП\\CoolPaint",
                 Filter = "JSON Files (*.json)|*.json|All files (*.*)|*.*",
@@ -173,18 +180,24 @@ namespace CoolPaint
             };
 
             if (openFile.ShowDialog() == true)
+            {
+                List<Shape> listShape = new List<Shape>();
+                List<Shape> objList = new List<Shape>();
+                foreach (ShapePropertyControl contr in shapesWindow.shapesBox.Items)
                 {
-                    StreamReader sr = new StreamReader(openFile.FileName);
-                    try
-                    {
-                        // read
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    sr.Close();
+                    listShape.Add(contr.shape);
                 }
+                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(listShape.GetType(), typeList.ToArray());
+                using (FileStream fStream = new FileStream(openFile.FileName, FileMode.Open))
+                {
+                    objList = jsonSerializer.ReadObject(fStream) as List<Shape>;
+                }
+
+                foreach (Shape shape in objList)
+                {
+                    shape.Draw(cnv);
+                }
+            }
         }
     }     
 }

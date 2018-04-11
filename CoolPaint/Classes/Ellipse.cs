@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using System.Runtime.Serialization;
 
 namespace CoolPaint
 {
@@ -8,6 +9,11 @@ namespace CoolPaint
     public class Ellipse : Rectangle
     {
         public Ellipse(Color color, Point p1, Point p2) : base(color, p1, p2)
+        {
+
+        }
+
+        protected Ellipse(SerializationInfo info, StreamingContext context) : base(info, context)
         {
 
         }

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using System.Runtime.Serialization;
 
 namespace CoolPaint
 {
@@ -33,6 +34,12 @@ namespace CoolPaint
 
         public Polygon(Color color, Point p1, Point p2) : base(color, p1, p2)
         {
+
+        }
+
+        protected Polygon(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+
         }
 
         protected override System.Windows.Shapes.Shape GenerateDrawBase()

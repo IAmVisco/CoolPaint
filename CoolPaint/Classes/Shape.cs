@@ -96,6 +96,18 @@ namespace CoolPaint
 
         protected Shape(SerializationInfo info, StreamingContext context)
         {
+            this.color = (Color)info.GetValue("color", typeof(Color));
+            this.p1 = (Point)info.GetValue("point1", typeof(Point));
+            this.p2 = (Point)info.GetValue("point2", typeof(Point));
+
+            SetP2X(p2);
+            SetP2Y(p2);
+
+            dBase = GenerateDrawBase();
+            StartPosSet();
+
+            FillFig();
+            SideSet();
 
         }
 
