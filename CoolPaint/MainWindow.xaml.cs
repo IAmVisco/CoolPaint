@@ -21,7 +21,6 @@ namespace CoolPaint
 
         private ShapesWindow shapesWindow;
         ShapePropertyControl spc;
-        OpenFileDialog openFile;
 
         List<Type> typeList = new List<Type>()
         {
@@ -64,7 +63,7 @@ namespace CoolPaint
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && openFile == null)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Point p2 = e.GetPosition(cnv);
                 shape.P2 = p2;
@@ -171,7 +170,7 @@ namespace CoolPaint
 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
-            openFile = new OpenFileDialog
+            OpenFileDialog openFile = new OpenFileDialog
             {
                 InitialDirectory = "C:\\Projects\\ООП\\CoolPaint",
                 Filter = "JSON Files (*.json)|*.json|All files (*.*)|*.*",
@@ -190,7 +189,14 @@ namespace CoolPaint
                 DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(listShape.GetType(), typeList.ToArray());
                 using (FileStream fStream = new FileStream(openFile.FileName, FileMode.Open))
                 {
-                    objList = jsonSerializer.ReadObject(fStream) as List<Shape>;
+                    try
+                    {
+                        objList = jsonSerializer.ReadObject(fStream) as List<Shape>;
+                    }
+                    catch
+                    {
+
+                    }
                 }
 
                 foreach (Shape shape in objList)
