@@ -193,9 +193,9 @@ namespace CoolPaint
                     {
                         objList = jsonSerializer.ReadObject(fStream) as List<Shape>;
                     }
-                    catch
+                    catch (Exception ex)
                     {
-
+                        MessageBox.Show("JSON you loaded is corrupted and raised the following exception: " + ex.Message, "Error");
                     }
                 }
 
