@@ -36,7 +36,7 @@ namespace CoolPaint
             }
         }
         protected Point p1;
-        public Point P2
+        public virtual Point P2
         {
             get
             {
