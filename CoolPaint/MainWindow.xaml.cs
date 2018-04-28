@@ -6,6 +6,8 @@ using Microsoft.Win32;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
 
 namespace CoolPaint
 {
@@ -18,6 +20,7 @@ namespace CoolPaint
         private Random r = new Random();
         private Factory factory;
         private Shape shape;
+        private readonly string pluginPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
 
         private ShapesWindow shapesWindow;
         ShapePropertyControl spc;
@@ -33,10 +36,21 @@ namespace CoolPaint
             typeof(Color),
             typeof(Point)
         };
+        private List<Factory> factoryList = new List<Factory>
+        {
+            new RectangleFactory(),
+            new SquareFactory(),
+            new EllipseFactory(),
+            new CircleFactory(),
+            new TriangleFactory(),
+            new HexagonFactory()
+        };
 
         public MainWindow()
         {
             InitializeComponent();
+            GetPlugins();
+            GetPluginFactories();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -87,37 +101,7 @@ namespace CoolPaint
             
             return color;
         }
-        #region Factories
-        private void sqrRadio_Checked(object sender, RoutedEventArgs e)
-        {
-            factory = new SquareFactory();
-        }
 
-        private void rectRadio_Checked(object sender, RoutedEventArgs e)
-        {
-            factory = new RectangleFactory();
-        }
-
-        private void crcRadio_Checked(object sender, RoutedEventArgs e)
-        {
-            factory = new CircleFactory();
-        }
-
-        private void ellRadio_Checked(object sender, RoutedEventArgs e)
-        {
-            factory = new EllipseFactory();
-        }
-
-        private void triRadio_Checked(object sender, RoutedEventArgs e)
-        {
-            factory = new TriangleFactory();
-        }
-
-        private void hexRadio_Checked(object sender, RoutedEventArgs e)
-        {
-            factory = new HexagonFactory();
-        }
-        #endregion
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             void reposWindow(Window w)
@@ -202,8 +186,55 @@ namespace CoolPaint
                 foreach (Shape shape in objList)
                 {
                     shape.Draw(cnv);
+                    shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(shape));
+                    shapesWindow.shapesBox.SelectedIndex = shapesWindow.shapesBox.Items.Count - 1;
                 }
             }
+        }
+
+        private void GetPlugins()
+        {
+            DirectoryInfo pluginDir = new DirectoryInfo(pluginPath);
+            if (!pluginDir.Exists)
+                pluginDir.Create();
+            var pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
+            foreach (var file in pluginFiles)
+            {
+                Assembly assembly = Assembly.LoadFrom(file);
+                var types = assembly.GetTypes().
+                    Where(t => t.GetInterfaces().
+                    Where(i => i.FullName == typeof(IPlugin).FullName).Any());
+                foreach(var type in types)
+                {
+                    shapeComboBox.Items.Add(type.Name);
+                    typeList.Add(type);
+                }
+            }
+        }
+
+        private void GetPluginFactories()
+        {
+            DirectoryInfo pluginDir = new DirectoryInfo(pluginPath);
+            if (!pluginDir.Exists)
+                pluginDir.Create();
+            var pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
+            foreach (var file in pluginFiles)
+            {
+                Assembly assembly = Assembly.LoadFrom(file);
+                var types = assembly.GetTypes().
+                    Where(t => t.GetInterfaces().
+                    Where(i => i.FullName == typeof(IPluginFactory).FullName).Any());
+                foreach (var type in types)
+                {
+                    Factory plugin = (Factory)Activator.CreateInstance(type);
+                    factoryList.Add(plugin);
+                }
+            }
+        }
+
+        private void SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            factory = factoryList[shapeComboBox.SelectedIndex];
         }
     }     
 }

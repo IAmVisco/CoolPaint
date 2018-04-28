@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace CoolPaint
 {
-    abstract class Factory
+    public abstract class Factory
     {
         public abstract Shape FactoryMethod(Color color, Point p1, Point p2);
     }
