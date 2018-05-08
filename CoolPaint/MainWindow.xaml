@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoolPaint"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
@@ -11,11 +12,11 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Title="Cool Paint" Height="600" Width="1024" Loaded="Window_Loaded">
-    <Grid Background="#333333">
+    <Grid x:Name="grid" Background="#333333">
         <Canvas Margin="0,50,0,0" Background="White" Name="cnv" MouseLeftButtonDown="cnv_MouseLeftButtonDown" 
                 MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove"/>
         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" x:Name="shapeComboBox" 
-                  Width="100" Foreground="#BFFFFFFF" SelectedIndex="0" SelectionChanged="SelectionChanged">
+                  Width="100" SelectedIndex="0" SelectionChanged="SelectionChanged">
             <Label>Rectangle</Label>
             <Label>Square</Label>
             <Label>Ellipse</Label>
@@ -24,11 +25,15 @@
             <Label>Hexagon</Label>
         </ComboBox>
         <Button Content="Clear" Width="100" Height="30" HorizontalAlignment="Right" 
-                VerticalAlignment="Top" Margin="10" Click="Button_Click"/>
+                VerticalAlignment="Top" Margin="50, 10" Click="Button_Click"/>
         <Button Content="Load" Width="100" Height="30" HorizontalAlignment="Right" 
-                VerticalAlignment="Top" Margin="10, 10, 130, 10" Click="LoadBtn_Click"/>
+                VerticalAlignment="Top" Margin="10, 10, 160, 10" Click="LoadBtn_Click"/>
         <Button Content="Save" Width="100" Height="30" HorizontalAlignment="Right" 
-                VerticalAlignment="Top" Margin="10, 10, 250, 10" Click="SaveBtn_Click"/>
+                VerticalAlignment="Top" Margin="10, 10, 270, 10" Click="SaveBtn_Click"/>
+        <Button Width="30" Height="30" Padding="-1" HorizontalAlignment="Right" 
+                VerticalAlignment="Top" Margin="10" Click="SettingsButton_Click">
+            <materialDesign:PackIcon Kind="Settings"/>
+        </Button>
     </Grid>
 </Window>
  

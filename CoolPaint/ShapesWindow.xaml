@@ -7,7 +7,7 @@
         mc:Ignorable="d" 
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Title="Shapes List" Height="600" Width="300">
-    <Grid Background="#333">
+    <Grid x:Name="shapesGrid" Background="#333">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto"/>

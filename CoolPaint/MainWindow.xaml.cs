@@ -8,6 +8,8 @@ using System.Runtime.Serialization.Json;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using System.Windows.Controls;
+using System.Xml;
 
 namespace CoolPaint
 {
@@ -23,6 +25,7 @@ namespace CoolPaint
         private readonly string pluginPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
 
         private ShapesWindow shapesWindow;
+        private SettingsWindow settingsWindow;
         ShapePropertyControl spc;
 
         List<Type> typeList = new List<Type>()
@@ -48,9 +51,34 @@ namespace CoolPaint
 
         public MainWindow()
         {
+            SetTheme();
             InitializeComponent();
             GetPlugins();
             GetPluginFactories();
+        }
+
+        public void SetTheme()
+        {
+            ResourceDictionary rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
+            rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
+            rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
+            rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -121,10 +149,11 @@ namespace CoolPaint
                 Width = 300,
                 Owner = this,
             };
-            reposWindow(shapesWindow);
-            shapesWindow.Show();
-            this.LocationChanged += (s, _) => reposWindow(shapesWindow);
-            this.SizeChanged += (s, _) => changeHeight(shapesWindow);
+
+            //reposWindow(shapesWindow);
+            //shapesWindow.Show();
+            //this.LocationChanged += (s, _) => reposWindow(shapesWindow);
+            //this.SizeChanged += (s, _) => changeHeight(shapesWindow);
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -206,7 +235,11 @@ namespace CoolPaint
                     Where(i => i.FullName == typeof(IPlugin).FullName).Any());
                 foreach(var type in types)
                 {
-                    shapeComboBox.Items.Add(type.Name);
+                    var label = new Label()
+                    {
+                        Content = type.Name
+                    };
+                    shapeComboBox.Items.Add(label);
                     typeList.Add(type);
                 }
             }
@@ -235,6 +268,12 @@ namespace CoolPaint
         private void SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             factory = factoryList[shapeComboBox.SelectedIndex];
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            settingsWindow = new SettingsWindow(this);
+            settingsWindow.ShowDialog();
         }
     }     
 }

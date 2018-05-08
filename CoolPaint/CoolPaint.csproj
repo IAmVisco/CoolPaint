@@ -71,12 +71,19 @@
     <Compile Include="Classes\Shape.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IPluginFactory.cs" />
+    <Compile Include="SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShapePropertyControl.xaml.cs">
       <DependentUpon>ShapePropertyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ShapesWindow.xaml.cs">
       <DependentUpon>ShapesWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ShapePropertyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
