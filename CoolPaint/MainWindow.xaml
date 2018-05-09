@@ -11,7 +11,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
-        Title="Cool Paint" Height="600" Width="1024" Loaded="Window_Loaded">
+        Title="Cool Paint" Height="600" Width="1024" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid x:Name="grid" Background="#333333">
         <Canvas Margin="0,50,0,0" Background="White" Name="cnv" MouseLeftButtonDown="cnv_MouseLeftButtonDown" 
                 MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove"/>

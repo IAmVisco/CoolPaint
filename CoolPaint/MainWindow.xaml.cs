@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Linq;
 using System.Windows.Controls;
 using System.Xml;
+using System.Text;
 
 namespace CoolPaint
 {
@@ -51,34 +52,10 @@ namespace CoolPaint
 
         public MainWindow()
         {
-            SetTheme();
             InitializeComponent();
             GetPlugins();
             GetPluginFactories();
-        }
 
-        public void SetTheme()
-        {
-            ResourceDictionary rd = new ResourceDictionary()
-            {
-                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml")
-            };
-            Resources.MergedDictionaries.Add(rd);
-            rd = new ResourceDictionary()
-            {
-                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml")
-            };
-            Resources.MergedDictionaries.Add(rd);
-            rd = new ResourceDictionary()
-            {
-                Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml")
-            };
-            Resources.MergedDictionaries.Add(rd);
-            rd = new ResourceDictionary()
-            {
-                Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml")
-            };
-            Resources.MergedDictionaries.Add(rd);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -154,6 +131,57 @@ namespace CoolPaint
             //shapesWindow.Show();
             //this.LocationChanged += (s, _) => reposWindow(shapesWindow);
             //this.SizeChanged += (s, _) => changeHeight(shapesWindow);
+
+            ResourceDictionary rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
+            
+            rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
+            rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
+            rd = new ResourceDictionary()
+            {
+                Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml")
+            };
+            Resources.MergedDictionaries.Add(rd);
+            settingsWindow = new SettingsWindow(this);
+            XmlDocument doc = new XmlDocument();
+            //try
+            {
+                doc.Load("config.xml");
+                XmlElement element = doc.DocumentElement;
+                XmlNode node = element["isLightTheme"];
+                Resources.MergedDictionaries[0] = new ResourceDictionary();
+                if (Convert.ToBoolean(node.InnerText))
+                {
+                    Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
+                    settingsWindow.Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
+                }
+                else
+                {
+                    Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
+                    settingsWindow.Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
+                }
+                node = element["AccentColor"];
+                Resources.MergedDictionaries[2] = new ResourceDictionary
+                {
+                    Source = new Uri(node.InnerText)
+                };
+            }
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -272,8 +300,18 @@ namespace CoolPaint
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            settingsWindow = new SettingsWindow(this);
             settingsWindow.ShowDialog();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            XmlTextWriter writer = new XmlTextWriter("config.xml", Encoding.UTF8);
+            writer.WriteStartDocument();
+            writer.WriteStartElement("root");
+            writer.WriteElementString("isLightTheme", settingsWindow.isLight.ToString());
+            writer.WriteElementString("AccentColor", settingsWindow.accentColor);
+            writer.WriteEndElement();
+            writer.Close();
         }
     }     
 }

@@ -28,6 +28,8 @@ namespace CoolPaint
             new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Pink.xaml"),
         };
 
+        public bool isLight = false;
+        public string accentColor = "";
 
         public SettingsWindow(MainWindow win)
         {
@@ -68,6 +70,7 @@ namespace CoolPaint
                 (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
                 settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEEEE"));
                 Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
+                isLight = true;
             }
             else
             {
@@ -75,12 +78,14 @@ namespace CoolPaint
                 (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
                 settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
                 Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
+                isLight = false;
             }
         }
 
         private void themeChanged(object sender, SelectionChangedEventArgs e)
         {
             (Owner as MainWindow).Resources.MergedDictionaries[2].Source = themes[themeBox.SelectedIndex];
+            accentColor = (themes[themeBox.SelectedIndex]).ToString();
         }
     }
 }
