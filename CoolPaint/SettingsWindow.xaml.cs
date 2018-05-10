@@ -29,7 +29,6 @@ namespace CoolPaint
         };
 
         public bool isLight = false;
-        public string accentColor = "";
 
         public SettingsWindow(MainWindow win)
         {
@@ -65,7 +64,6 @@ namespace CoolPaint
         private void themeChanged(object sender, SelectionChangedEventArgs e)
         {
             (Owner as MainWindow).Resources.MergedDictionaries[2].Source = themes[themeBox.SelectedIndex];
-            accentColor = (themes[themeBox.SelectedIndex]).ToString();
         }
 
         private void themeToggle_Checked(object sender, RoutedEventArgs e)

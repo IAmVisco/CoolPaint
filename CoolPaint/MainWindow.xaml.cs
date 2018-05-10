@@ -309,7 +309,7 @@ namespace CoolPaint
                 writer.WriteStartDocument();
                 writer.WriteStartElement("root");
                 writer.WriteElementString("isLightTheme", settingsWindow.isLight.ToString());
-                writer.WriteElementString("AccentColor", settingsWindow.accentColor);
+                writer.WriteElementString("AccentColor", Resources.MergedDictionaries[2].Source.ToString());
                 writer.WriteEndElement();
                 writer.Close();
             }
