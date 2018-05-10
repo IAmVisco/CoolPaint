@@ -14,7 +14,7 @@
     <Grid x:Name="settingsGrid" Background="#333333">
         <ToggleButton x:Name="themeToggle" Style="{StaticResource MaterialDesignSwitchToggleButton}" 
                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" 
-                      Click="ToggleButton_Click"/>
+                      Checked="themeToggle_Checked" Unchecked="themeToggle_Unchecked"/>
         <TextBlock Text="Dark" HorizontalAlignment="Left" Margin="30, 10"/>
         <TextBlock Text="Light" HorizontalAlignment="Right" Margin="30, 10"/>
         <ComboBox x:Name="themeBox" SelectedIndex="0" SelectionChanged="themeChanged" Margin="30">

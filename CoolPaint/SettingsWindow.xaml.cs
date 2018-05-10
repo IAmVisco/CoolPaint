@@ -62,30 +62,28 @@ namespace CoolPaint
             Resources.MergedDictionaries.Add(rd);
         }
 
-        private void ToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            if ((bool)themeToggle.IsChecked)
-            {
-                (Owner as MainWindow).grid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEEEE"));
-                (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
-                settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEEEE"));
-                Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
-                isLight = true;
-            }
-            else
-            {
-                (Owner as MainWindow).grid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
-                (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
-                settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
-                Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
-                isLight = false;
-            }
-        }
-
         private void themeChanged(object sender, SelectionChangedEventArgs e)
         {
             (Owner as MainWindow).Resources.MergedDictionaries[2].Source = themes[themeBox.SelectedIndex];
             accentColor = (themes[themeBox.SelectedIndex]).ToString();
+        }
+
+        private void themeToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            (Owner as MainWindow).grid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEEEE"));
+            (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
+            settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEEEE"));
+            Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
+            isLight = true;
+        }
+
+        private void themeToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            (Owner as MainWindow).grid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
+            (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
+            settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
+            Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
+            isLight = false;
         }
     }
 }

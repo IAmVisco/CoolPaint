@@ -155,7 +155,7 @@ namespace CoolPaint
             Resources.MergedDictionaries.Add(rd);
             settingsWindow = new SettingsWindow(this);
             XmlDocument doc = new XmlDocument();
-            //try
+            try
             {
                 doc.Load("config.xml");
                 XmlElement element = doc.DocumentElement;
@@ -163,13 +163,11 @@ namespace CoolPaint
                 Resources.MergedDictionaries[0] = new ResourceDictionary();
                 if (Convert.ToBoolean(node.InnerText))
                 {
-                    Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
-                    settingsWindow.Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
+                    settingsWindow.themeToggle.IsChecked = true;
                 }
                 else
                 {
-                    Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
-                    settingsWindow.Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
+                    settingsWindow.themeToggle.IsChecked = false;
                 }
                 node = element["AccentColor"];
                 Resources.MergedDictionaries[2] = new ResourceDictionary
@@ -177,10 +175,10 @@ namespace CoolPaint
                     Source = new Uri(node.InnerText)
                 };
             }
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -305,13 +303,20 @@ namespace CoolPaint
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            XmlTextWriter writer = new XmlTextWriter("config.xml", Encoding.UTF8);
-            writer.WriteStartDocument();
-            writer.WriteStartElement("root");
-            writer.WriteElementString("isLightTheme", settingsWindow.isLight.ToString());
-            writer.WriteElementString("AccentColor", settingsWindow.accentColor);
-            writer.WriteEndElement();
-            writer.Close();
+            try
+            {
+                XmlTextWriter writer = new XmlTextWriter("config.xml", Encoding.UTF8);
+                writer.WriteStartDocument();
+                writer.WriteStartElement("root");
+                writer.WriteElementString("isLightTheme", settingsWindow.isLight.ToString());
+                writer.WriteElementString("AccentColor", settingsWindow.accentColor);
+                writer.WriteEndElement();
+                writer.Close();
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
     }     
 }
