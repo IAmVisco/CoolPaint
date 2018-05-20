@@ -155,7 +155,6 @@ namespace CoolPaint
 
         public void Draw(Canvas cnv)
         {
-
             cnv.Children.Add(dBase);
         }
 

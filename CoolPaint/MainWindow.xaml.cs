@@ -301,6 +301,20 @@ namespace CoolPaint
             settingsWindow.ShowDialog();
         }
 
+        private void SaveFigBtn_Click(object sender, RoutedEventArgs e)
+        {
+            List<Shape> customList = new List<Shape>();
+            for (int i = 0; i < shapesWindow.shapesBox.Items.Count; i++)
+            {
+                customList.Add((shapesWindow.shapesBox.Items[i] as ShapePropertyControl).shape);
+            }
+
+            CustomFigure custom = new CustomFigure(customList);
+            cnv.Children.Clear();
+            shapesWindow.shapesBox.Items.Clear();
+            custom.Draw(cnv);
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try

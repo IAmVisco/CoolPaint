@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Circle.cs" />
+    <Compile Include="Classes\CustomFigure.cs" />
     <Compile Include="Classes\Ellipse.cs" />
     <Compile Include="Classes\Factory.cs" />
     <Compile Include="Classes\Hexagon.cs" />
