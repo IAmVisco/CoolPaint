@@ -177,5 +177,11 @@ namespace CoolPaint
             info.AddValue("point1", p1);
             info.AddValue("point2", p2);         
         }
+
+        public void Move(Point delta)
+        {
+            P1 = new Point(P1.X + delta.X, P1.Y + delta.Y);
+            P2 = new Point(P1.X + Width, P1.Y + Height);
+        }
     }
 }

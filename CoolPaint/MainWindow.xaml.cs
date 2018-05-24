@@ -20,6 +20,7 @@ namespace CoolPaint
     public partial class MainWindow : Window
     {
         private Point p1;
+        private Point RightButtonDownPos;
         private Random r = new Random();
         private Factory factory;
         private Shape shape;
@@ -40,7 +41,7 @@ namespace CoolPaint
             typeof(Color),
             typeof(Point)
         };
-        private List<Factory> factoryList = new List<Factory>
+        List<Factory> factoryList = new List<Factory>
         {
             new RectangleFactory(),
             new SquareFactory(),
@@ -49,6 +50,7 @@ namespace CoolPaint
             new TriangleFactory(),
             new HexagonFactory()
         };
+        List<CustomFigure> customFigList = new List<CustomFigure>();
 
         public MainWindow()
         {
@@ -90,6 +92,15 @@ namespace CoolPaint
                 spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
                 spc.Height.Text = Math.Round(shape.Height, 1).ToString();
                 spc.Width.Text = Math.Round(shape.Width, 1).ToString();
+            }
+            else if (e.RightButton == MouseButtonState.Pressed && shapesWindow.shapesBox.SelectedItem != null)
+            {
+                Point delta = new Point(e.GetPosition(cnv).X - RightButtonDownPos.X, e.GetPosition(cnv).Y - RightButtonDownPos.Y);
+
+                //(shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).shape.Move(delta);
+                customFigList.Last<CustomFigure>().Move(delta);
+
+                RightButtonDownPos = e.GetPosition(cnv);
             }
             
         }
@@ -313,6 +324,7 @@ namespace CoolPaint
             cnv.Children.Clear();
             shapesWindow.shapesBox.Items.Clear();
             custom.Draw(cnv);
+            customFigList.Add(custom);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -331,6 +343,18 @@ namespace CoolPaint
             {
                 
             }
+        }
+
+        private void cnv_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Cursor = Cursors.SizeAll;
+
+            RightButtonDownPos = e.GetPosition(cnv);
+        }
+
+        private void cnv_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
         }
     }     
 }

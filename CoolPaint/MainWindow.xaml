@@ -14,7 +14,7 @@
         Title="Cool Paint" Height="600" Width="1024" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid x:Name="grid" Background="#333333">
         <Canvas Margin="0,50,0,0" Background="White" Name="cnv" MouseLeftButtonDown="cnv_MouseLeftButtonDown" 
-                MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove"/>
+                MouseLeftButtonUp="cnv_MouseLeftButtonUp" MouseMove="cnv_MouseMove" MouseRightButtonDown="cnv_MouseRightButtonDown" MouseRightButtonUp="cnv_MouseRightButtonUp"/>
         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" x:Name="shapeComboBox" 
                   Width="100" SelectedIndex="0" SelectionChanged="SelectionChanged">
             <Label>Rectangle</Label>

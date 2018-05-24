@@ -21,6 +21,16 @@ namespace CoolPaint
             Width.Text = shape.Width.ToString();
         }
 
+        //public ShapePropertyControl(CustomFigure shape)
+        //{
+        //    InitializeComponent();
+        //    this.shape = shape;
+
+        //    Name.Text = shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1);
+        //    Height.Text = shape.Height.ToString();
+        //    Width.Text = shape.Width.ToString();
+        //}
+
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
         }
