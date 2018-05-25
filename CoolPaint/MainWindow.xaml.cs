@@ -96,9 +96,10 @@ namespace CoolPaint
             else if (e.RightButton == MouseButtonState.Pressed && shapesWindow.shapesBox.SelectedItem != null)
             {
                 Point delta = new Point(e.GetPosition(cnv).X - RightButtonDownPos.X, e.GetPosition(cnv).Y - RightButtonDownPos.Y);
-
-                //(shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).shape.Move(delta);
-                customFigList.Last<CustomFigure>().Move(delta);
+                if ((shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).shape != null)
+                    (shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).shape.Move(delta);
+                else
+                    (shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).custom.Move(delta);
 
                 RightButtonDownPos = e.GetPosition(cnv);
             }
@@ -138,10 +139,10 @@ namespace CoolPaint
                 Owner = this,
             };
 
-            //reposWindow(shapesWindow);
-            //shapesWindow.Show();
-            //this.LocationChanged += (s, _) => reposWindow(shapesWindow);
-            //this.SizeChanged += (s, _) => changeHeight(shapesWindow);
+            reposWindow(shapesWindow);
+            shapesWindow.Show();
+            this.LocationChanged += (s, _) => reposWindow(shapesWindow);
+            this.SizeChanged += (s, _) => changeHeight(shapesWindow);
 
             ResourceDictionary rd = new ResourceDictionary()
             {
@@ -317,7 +318,10 @@ namespace CoolPaint
             List<Shape> customList = new List<Shape>();
             for (int i = 0; i < shapesWindow.shapesBox.Items.Count; i++)
             {
-                customList.Add((shapesWindow.shapesBox.Items[i] as ShapePropertyControl).shape);
+                if ((shapesWindow.shapesBox.Items[i] as ShapePropertyControl).shape != null)
+                    customList.Add((shapesWindow.shapesBox.Items[i] as ShapePropertyControl).shape);
+                else
+                    customList.AddRange((shapesWindow.shapesBox.Items[i] as ShapePropertyControl).custom.list);
             }
 
             CustomFigure custom = new CustomFigure(customList);
@@ -325,6 +329,8 @@ namespace CoolPaint
             shapesWindow.shapesBox.Items.Clear();
             custom.Draw(cnv);
             customFigList.Add(custom);
+            shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(custom));
+            shapesWindow.shapesBox.SelectedIndex = shapesWindow.shapesBox.Items.Count - 1;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

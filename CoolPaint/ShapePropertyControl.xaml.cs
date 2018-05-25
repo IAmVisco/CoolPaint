@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -10,6 +11,8 @@ namespace CoolPaint
     public partial class ShapePropertyControl : UserControl
     {
         public Shape shape;
+        public CustomFigure custom;
+        List<Shape> list = new List<Shape>();
 
         public ShapePropertyControl(Shape shape)
         {
@@ -21,15 +24,15 @@ namespace CoolPaint
             Width.Text = shape.Width.ToString();
         }
 
-        //public ShapePropertyControl(CustomFigure shape)
-        //{
-        //    InitializeComponent();
-        //    this.shape = shape;
+        public ShapePropertyControl(CustomFigure shape)
+        {
+            InitializeComponent();
+            custom = shape;
 
-        //    Name.Text = shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1);
-        //    Height.Text = shape.Height.ToString();
-        //    Width.Text = shape.Width.ToString();
-        //}
+            Name.Text = "Custom";
+            Height.Text = shape.Height.ToString();
+            Width.Text = shape.Width.ToString();
+        }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

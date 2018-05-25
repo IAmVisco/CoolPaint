@@ -10,9 +10,32 @@ namespace CoolPaint
 {
     public class CustomFigure
     {
-        List<Shape> list = new List<Shape>();
-        public Point p1;
-        public Point p2;
+        public List<Shape> list = new List<Shape>();
+        public Point P1
+        {
+            get
+            {
+                return p1;
+            }
+            set
+            {
+                p1 = value;
+                StartPosSet();
+            }
+        }
+        public virtual Point P2
+        {
+            get
+            {
+                return p2;
+            }
+            set
+            {
+                StartPosSet();
+            }
+        }
+        protected Point p1;
+        protected Point p2;
         public double Height;
         public double Width;
 
@@ -35,19 +58,17 @@ namespace CoolPaint
             list.Sort((s1, s2) => s1.P1.Y.CompareTo(s2.P1.Y));
             double diffY = list[0].P1.Y;
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i].P1 = new Point(list[i].P1.X - diffX, list[i].P1.Y - diffY);
-            }
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    list[i].P1 = new Point(list[i].P1.X - diffX, list[i].P1.Y - diffY);
+            //}
             p1 = new Point(0, 0);
-
+            //p1 = new Point(diffX, diffY);
             list.Sort((s1, s2) => s2.P2.X.CompareTo(s1.P2.X));
             p2 = new Point(list[0].P2.X, 0);
 
             list.Sort((s1, s2) => s2.P2.Y.CompareTo(s1.P2.Y));
             p2.Y = list[0].P2.Y;
-
-            //MessageBox.Show(p1.ToString() + " " + p2.ToString());
         }
 
         public void Draw(Canvas cnv)
@@ -58,14 +79,18 @@ namespace CoolPaint
 
         public void Move(Point delta)
         {
-            p1 = new Point(p1.X + delta.X, p1.Y + delta.Y);
-            p2 = new Point(p1.X + Width, p1.Y + Height);
+            P1 = new Point(p1.X + delta.X, p1.Y + delta.Y);
+            P2 = new Point(p1.X + Width, p1.Y + Height);
         }
 
-        //private void StartPosSet()
-        //{
-        //    Canvas.SetLeft(dBase, p1.X);
-        //    Canvas.SetTop(dBase, p1.Y);
-        //}
+        private void StartPosSet()
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                Canvas.SetLeft(list[i].dBase, p1.X + list[i].P1.X);
+                Canvas.SetTop(list[i].dBase, p1.Y + list[i].P1.Y);
+            }
+
+        }
     }
 }
