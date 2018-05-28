@@ -91,8 +91,8 @@ namespace CoolPaint
                 shape.P2 = p2;
 
                 spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-                spc.Height.Text = shape.P1.ToString();
-                spc.Width.Text = shape.P2.ToString();
+                spc.Height.Text = shape.Height.ToString();
+                spc.Width.Text = shape.Width.ToString();
             }
             else if (e.RightButton == MouseButtonState.Pressed && shapesWindow.shapesBox.SelectedItem != null)
             {
@@ -101,15 +101,12 @@ namespace CoolPaint
                 {
                     (shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).shape.Move(delta);
                     spc = shapesWindow.shapesBox.SelectedItem as ShapePropertyControl;
-                    spc.Height.Text = shape.P1.ToString();
-                    spc.Width.Text = shape.P2.ToString();
+                    spc.Height.Text = shape.Height.ToString();
+                    spc.Width.Text = shape.Width.ToString();
                 }
                 else
                 {
                     (shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).custom.Move(delta);
-                    spc = shapesWindow.shapesBox.SelectedItem as ShapePropertyControl;
-                    spc.Height.Text = spc.custom.P1.ToString();
-                    spc.Width.Text = spc.custom.P2.ToString();
                 }
 
 
@@ -150,10 +147,10 @@ namespace CoolPaint
                 Owner = this,
             };
 
-            //reposWindow(shapesWindow);
-            //shapesWindow.Show();
-            //this.LocationChanged += (s, _) => reposWindow(shapesWindow);
-            //this.SizeChanged += (s, _) => changeHeight(shapesWindow);
+            reposWindow(shapesWindow);
+            shapesWindow.Show();
+            this.LocationChanged += (s, _) => reposWindow(shapesWindow);
+            this.SizeChanged += (s, _) => changeHeight(shapesWindow);
 
             ResourceDictionary rd = new ResourceDictionary()
             {

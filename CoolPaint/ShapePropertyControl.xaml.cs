@@ -20,8 +20,8 @@ namespace CoolPaint
             this.shape = shape;
 
             Name.Text = shape.ToString().Substring(shape.ToString().LastIndexOf('.') + 1);
-            Height.Text = shape.P1.ToString();
-            Width.Text = shape.P2.ToString();
+            Height.Text = shape.Height.ToString();
+            Width.Text = shape.Width.ToString();
         }
 
         public ShapePropertyControl(CustomFigure shape)
@@ -30,8 +30,8 @@ namespace CoolPaint
             custom = shape;
 
             Name.Text = "Custom";
-            Height.Text = shape.P1.ToString();
-            Width.Text = shape.P2.ToString();
+            Height.Text = shape.Height.ToString();
+            Width.Text = shape.Width.ToString();
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
