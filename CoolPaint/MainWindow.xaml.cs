@@ -84,26 +84,37 @@ namespace CoolPaint
 
         private void cnv_MouseMove(object sender, MouseEventArgs e)
         {
+            xy.Content = String.Format("X: {0} Y: {1}", e.GetPosition(cnv).X, e.GetPosition(cnv).Y);
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Point p2 = e.GetPosition(cnv);
                 shape.P2 = p2;
 
                 spc = shapesWindow.shapesBox.Items[shapesWindow.shapesBox.Items.Count - 1] as ShapePropertyControl;
-                spc.Height.Text = Math.Round(shape.Height, 1).ToString();
-                spc.Width.Text = Math.Round(shape.Width, 1).ToString();
+                spc.Height.Text = shape.P1.ToString();
+                spc.Width.Text = shape.P2.ToString();
             }
             else if (e.RightButton == MouseButtonState.Pressed && shapesWindow.shapesBox.SelectedItem != null)
             {
                 Point delta = new Point(e.GetPosition(cnv).X - RightButtonDownPos.X, e.GetPosition(cnv).Y - RightButtonDownPos.Y);
                 if ((shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).shape != null)
+                {
                     (shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).shape.Move(delta);
+                    spc = shapesWindow.shapesBox.SelectedItem as ShapePropertyControl;
+                    spc.Height.Text = shape.P1.ToString();
+                    spc.Width.Text = shape.P2.ToString();
+                }
                 else
+                {
                     (shapesWindow.shapesBox.SelectedItem as ShapePropertyControl).custom.Move(delta);
+                    spc = shapesWindow.shapesBox.SelectedItem as ShapePropertyControl;
+                    spc.Height.Text = spc.custom.P1.ToString();
+                    spc.Width.Text = spc.custom.P2.ToString();
+                }
+
 
                 RightButtonDownPos = e.GetPosition(cnv);
-            }
-            
+            }     
         }
 
         public Color RNGColor()
@@ -139,10 +150,10 @@ namespace CoolPaint
                 Owner = this,
             };
 
-            reposWindow(shapesWindow);
-            shapesWindow.Show();
-            this.LocationChanged += (s, _) => reposWindow(shapesWindow);
-            this.SizeChanged += (s, _) => changeHeight(shapesWindow);
+            //reposWindow(shapesWindow);
+            //shapesWindow.Show();
+            //this.LocationChanged += (s, _) => reposWindow(shapesWindow);
+            //this.SizeChanged += (s, _) => changeHeight(shapesWindow);
 
             ResourceDictionary rd = new ResourceDictionary()
             {
@@ -192,6 +203,28 @@ namespace CoolPaint
                 MessageBox.Show(ex.Message);
             }
 
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\custom.json"))
+            {
+                List<Shape> objList = new List<Shape>();
+                DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(objList.GetType(), typeList.ToArray());
+                using (FileStream fStream = new FileStream(Directory.GetCurrentDirectory() + "\\custom.json", FileMode.Open))
+                {
+                    try
+                    {
+                        objList = jsonSerializer.ReadObject(fStream) as List<Shape>;
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+                }
+                List<Shape> customList = new List<Shape>();
+                CustomFigure custom = new CustomFigure(objList);
+                custom.Draw(cnv);
+                //customFigList.Add(custom);
+                shapesWindow.shapesBox.Items.Add(new ShapePropertyControl(custom));
+                shapesWindow.shapesBox.SelectedIndex = shapesWindow.shapesBox.Items.Count - 1;
+            }
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -209,7 +242,10 @@ namespace CoolPaint
                 List<Shape> listShape = new List<Shape>();
                 foreach (ShapePropertyControl contr in shapesWindow.shapesBox.Items)
                 {
-                    listShape.Add(contr.shape);                
+                    if (contr.shape != null)
+                        listShape.Add(contr.shape);
+                    else
+                        listShape.AddRange(contr.custom.list);
                 }
                 DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(listShape.GetType(), typeList.ToArray());
                 using (FileStream fStream = new FileStream(saveFile.FileName, FileMode.Create))
@@ -348,6 +384,18 @@ namespace CoolPaint
             catch (Exception ex)
             {
                 
+            }
+            string cwd = Directory.GetCurrentDirectory() + "\\custom.json";
+            List<Shape> listShape = new List<Shape>();
+            foreach (ShapePropertyControl contr in shapesWindow.shapesBox.Items)
+            {
+                if (contr.custom != null)
+                    listShape.AddRange(contr.custom.list);
+            }
+            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(listShape.GetType(), typeList.ToArray());
+            using (FileStream fStream = new FileStream(cwd, FileMode.Create))
+            {
+                jsonSerializer.WriteObject(fStream, listShape);
             }
         }
 

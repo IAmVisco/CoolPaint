@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace CoolPaint
 {
@@ -10,6 +11,27 @@ namespace CoolPaint
         public ShapesWindow()
         {
             InitializeComponent();
+            //ResourceDictionary rd = new ResourceDictionary()
+            //{
+            //    Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml")
+            //};
+            //Resources.MergedDictionaries.Add(rd);
+
+            //rd = new ResourceDictionary()
+            //{
+            //    Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml")
+            //};
+            //Resources.MergedDictionaries.Add(rd);
+            //rd = new ResourceDictionary()
+            //{
+            //    Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml")
+            //};
+            //Resources.MergedDictionaries.Add(rd);
+            //rd = new ResourceDictionary()
+            //{
+            //    Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml")
+            //};
+            //Resources.MergedDictionaries.Add(rd);
         }
 
         private void ReClrBtn_Click(object sender, RoutedEventArgs e)
