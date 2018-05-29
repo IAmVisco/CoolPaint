@@ -300,21 +300,28 @@ namespace CoolPaint
             if (!pluginDir.Exists)
                 pluginDir.Create();
             var pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
-            foreach (var file in pluginFiles)
+            try
             {
-                Assembly assembly = Assembly.LoadFrom(file);
-                var types = assembly.GetTypes().
-                    Where(t => t.GetInterfaces().
-                    Where(i => i.FullName == typeof(IPlugin).FullName).Any());
-                foreach(var type in types)
+                foreach (var file in pluginFiles)
                 {
-                    var label = new Label()
+                    Assembly assembly = Assembly.LoadFrom(file);
+
+                    var types = assembly.GetTypes().
+                        Where(t => t.GetInterfaces().Contains(typeof(IPlugin))); // better than below
+                    foreach (var type in types)
                     {
-                        Content = type.Name
-                    };
-                    shapeComboBox.Items.Add(label);
-                    typeList.Add(type);
+                        var label = new Label()
+                        {
+                            Content = type.Name
+                        };
+                        shapeComboBox.Items.Add(label);
+                        typeList.Add(type);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot load assemblies.");
             }
         }
 
@@ -324,17 +331,24 @@ namespace CoolPaint
             if (!pluginDir.Exists)
                 pluginDir.Create();
             var pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
-            foreach (var file in pluginFiles)
+            try
             {
-                Assembly assembly = Assembly.LoadFrom(file);
-                var types = assembly.GetTypes().
-                    Where(t => t.GetInterfaces().
-                    Where(i => i.FullName == typeof(IPluginFactory).FullName).Any());
-                foreach (var type in types)
+                foreach (var file in pluginFiles)
                 {
-                    Factory plugin = (Factory)Activator.CreateInstance(type);
-                    factoryList.Add(plugin);
+                    Assembly assembly = Assembly.LoadFrom(file);
+                    var types = assembly.GetTypes().
+                        Where(t => t.GetInterfaces().
+                        Where(i => i.FullName == typeof(IPluginFactory).FullName).Any());
+                    foreach (var type in types)
+                    {
+                        Factory plugin = (Factory)Activator.CreateInstance(type);
+                        factoryList.Add(plugin);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot load factory assembly.");
             }
         }
 
