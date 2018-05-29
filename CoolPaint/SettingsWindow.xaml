@@ -10,7 +10,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"      
-        Title="Settings" Height="200" Width="200" WindowStartupLocation="CenterOwner">
+        Title="Settings" Height="200" Width="200" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
     <Grid x:Name="settingsGrid" Background="#333333">
         <ToggleButton x:Name="themeToggle" Style="{StaticResource MaterialDesignSwitchToggleButton}" 
                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" 

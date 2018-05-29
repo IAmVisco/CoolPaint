@@ -154,7 +154,7 @@ namespace CoolPaint
 
             ResourceDictionary rd = new ResourceDictionary()
             {
-                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml")
+                Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml")
             };
             Resources.MergedDictionaries.Add(rd);
             
@@ -188,6 +188,8 @@ namespace CoolPaint
                 else
                 {
                     settingsWindow.themeToggle.IsChecked = false;
+                    shapeComboBox.Foreground = new SolidColorBrush(Colors.White);
+                    xy.Foreground = new SolidColorBrush(Colors.White);
                 }
                 node = element["AccentColor"];
                 Resources.MergedDictionaries[2] = new ResourceDictionary

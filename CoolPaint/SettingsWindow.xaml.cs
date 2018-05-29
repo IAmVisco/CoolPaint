@@ -72,6 +72,8 @@ namespace CoolPaint
             (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
             settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEEEE"));
             Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml");
+            (Owner as MainWindow).shapeComboBox.Foreground = new SolidColorBrush(Colors.Black);
+            (Owner as MainWindow).xy.Foreground = new SolidColorBrush(Colors.Black);
             isLight = true;
         }
 
@@ -81,7 +83,15 @@ namespace CoolPaint
             (Owner as MainWindow).Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
             settingsGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
             Resources.MergedDictionaries[0].Source = new Uri("pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml");
+            (Owner as MainWindow).shapeComboBox.Foreground = new SolidColorBrush(Colors.White);
+            (Owner as MainWindow).xy.Foreground = new SolidColorBrush(Colors.White);
             isLight = false;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
     }
 }
